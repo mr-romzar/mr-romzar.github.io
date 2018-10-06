@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+    <link href="http://allfont.ru/allfont.css?fonts=nashville" rel="stylesheet" type="text/css" />
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script>
@@ -39,7 +39,7 @@
 
 
         function animateText() {
-            animateHeading("method", 1);
+            animateHeading("metod", 1);
             // animateSubheading("multifunctional company", 1)
             // setInterval(
             //     function() {
@@ -57,6 +57,11 @@
 
 <body onload="animateText();">
     <style>
+        @font-face {
+            font-family: "Happy Campers";
+            src: url("HappyCampersNF.ttf");
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -78,22 +83,23 @@
         
         .text {
             color: white;
-            min-height: 216px;
-            width: 442px;
+            min-height: 210px;
+            min-width: 400px;
         }
         
         #subheading {
             font-family: 'Courier New', Courier, monospace;
             font-weight: bolder;
-            font-size: 32px;
+            font-size: 29px;
         }
         
         #heading {
-            font-family: sans-serif;
-            font-weight: bolder;
+            font-family: 'Happy Campers', arial;
+            /* font-weight: bolder; */
             text-transform: uppercase;
             display: block;
-            font-size: 102px;
+            font-size: 155px;
+            /* letter-spacing: 10px; */
         }
     </style>
 
