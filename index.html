@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script>
+        function animateHeading(text, i) {
+            document.getElementById("heading").innerHTML = text.substring(0, i);
+            i++;
+            if (i > text.length) return;
+            setTimeout("animateHeading('" + text + "'," + i + ")", 750);
+        }
+
+        function animateSubheading(text, i) {
+            document.getElementById("subheading").innerHTML = text.substring(0, i);
+            i++;
+            if (i > text.length) return;
+            setTimeout("animateSubheading('" + text + "'," + i + ")", 150);
+        }
+
+
+        function animateText() {
+            animateHeading("metod", 1);
+            animateSubheading("multifunctional company", 1);
+            setInterval(
+                function() {
+                    $('.text').animate({
+                        opacity: 0.3
+                    }, 700).animate({
+                        opacity: 1
+                    }, 700);
+
+                }, 3000);
+
+        }
+    </script>
+</head>
+
+<body onload="animateText();">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            display: table;
+            width: 100%;
+        }
+        
+        .preloader {
+            width: 100%;
+            height: 100vh;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .text {
+            color: white;
+            width: 443px;
+        }
+        
+        #subheading {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bolder;
+            font-size: 32px;
+        }
+        
+        #heading {
+            font-family: 'Kanit', sans-serif;
+            font-weight: bolder;
+            text-transform: uppercase;
+            display: block;
+            font-size: 140px;
+        }
+    </style>
+
+    <div class="preloader">
+        <div class="text">
+            <span id="heading">Metod</span>
+            <span id="subheading">multifunctional company</span>
+        </div>
+    </div>
+
+</body>
+
+</html>
