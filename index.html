@@ -12,30 +12,44 @@
         function animateHeading(text, i) {
             document.getElementById("heading").innerHTML = text.substring(0, i);
             i++;
-            if (i > text.length) return;
-            setTimeout("animateHeading('" + text + "'," + i + ")", 750);
+            if (i > text.length) {
+                animateSubheading("multifunctional company", 1);
+                return;
+            }
+            setTimeout("animateHeading('" + text + "'," + i + ")", 500);
         }
 
         function animateSubheading(text, i) {
             document.getElementById("subheading").innerHTML = text.substring(0, i);
             i++;
-            if (i > text.length) return;
-            setTimeout("animateSubheading('" + text + "'," + i + ")", 150);
+            if (i > text.length) {
+                setInterval(
+                    function() {
+                        $('.text').animate({
+                            opacity: 0.3
+                        }, 700).animate({
+                            opacity: 1
+                        }, 700);
+
+                    }, 0);
+                return;
+            }
+            setTimeout("animateSubheading('" + text + "'," + i + ")", 100);
         }
 
 
         function animateText() {
-            animateHeading("metod", 1);
-            animateSubheading("multifunctional company", 1);
-            setInterval(
-                function() {
-                    $('.text').animate({
-                        opacity: 0.3
-                    }, 700).animate({
-                        opacity: 1
-                    }, 700);
+            animateHeading("method", 1);
+            // animateSubheading("multifunctional company", 1)
+            // setInterval(
+            //     function() {
+            //         $('.text').animate({
+            //             opacity: 0.3
+            //         }, 700).animate({
+            //             opacity: 1
+            //         }, 700);
 
-                }, 3000);
+            //     }, 3000);
 
         }
     </script>
@@ -64,7 +78,8 @@
         
         .text {
             color: white;
-            width: 443px;
+            min-height: 216px;
+            width: 442px;
         }
         
         #subheading {
@@ -74,18 +89,18 @@
         }
         
         #heading {
-            font-family: 'Kanit', sans-serif;
+            font-family: sans-serif;
             font-weight: bolder;
             text-transform: uppercase;
             display: block;
-            font-size: 140px;
+            font-size: 102px;
         }
     </style>
 
     <div class="preloader">
         <div class="text">
             <span id="heading">Metod</span>
-            <span id="subheading">multifunctional company</span>
+            <span id="subheading"></span>
         </div>
     </div>
 
