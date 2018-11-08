@@ -58,6 +58,7 @@ body {
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
     color: white;
+    background-size: contain;
 }
 
 .flip {

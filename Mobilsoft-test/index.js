@@ -14,7 +14,7 @@ var moves = 0;
 function initCardArray(width, height) {
     var values = new Array(width * height / 2);
     for (var i = 0; i < values.length; i++) {
-        values[i] = i + 1;
+        values[i] = i % 10;
     }
     values = values.concat(values);
     values.sort(function() {
@@ -22,7 +22,7 @@ function initCardArray(width, height) {
     })
     var cards = document.getElementsByClassName("back");
     for (var i = 0; i < cards.length; i++) {
-        cards[i].innerHTML = values[i];
+        cards[i].style.backgroundImage = "url(https://kde.link/test/" + values[i] + ".png)";
     }
 }
 
@@ -41,18 +41,19 @@ function endGame() {
 function flipOnClick() {
     if (!checkedFirst && allowClick && !this.classList.contains("wicked")) {
         checkedFirst = this;
-        this.classList.toggle("flip");
+        this.classList.add("flip");
     } else if (!checkedSecond && !this.classList.contains("wicked")) {
         checkedSecond = this;
         score.innerHTML = ++moves;
-        this.classList.toggle("flip");
-        if (checkedFirst.innerHTML == checkedSecond.innerHTML &&
-            checkedFirst != checkedSecond) {
+        this.classList.add("flip");
+        if (checkedFirst.innerHTML == checkedSecond.innerHTML && checkedFirst != checkedSecond) {
             checkedFirst.classList.add("wicked");
             checkedSecond.classList.add("wicked");
             resetCheckedCards();
             if (endGame()) {
-                alert("You won with " + moves + " moves");
+                setTimeout(function() {
+                    alert("You won in " + moves + " moves");
+                }, 500)
             }
         } else {
             allowClick = false;
@@ -67,8 +68,8 @@ function flipOnClick() {
     }
 }
 
-function initInterface(width, height) {
-    var centeringElement = document.createElement("div");
+function initField(width, height) {
+    var centeringDiv = document.createElement("div");
     for (var i = 0; i < height; i++) {
         var itemsRow = document.createElement("div");
         itemsRow.className = "items-row";
@@ -87,10 +88,31 @@ function initInterface(width, height) {
 
             itemsRow.appendChild(fieldItem);
         }
-        centeringElement.appendChild(itemsRow);
+        centeringDiv.appendChild(itemsRow);
     }
-    field.appendChild(centeringElement);
+    field.appendChild(centeringDiv);
 
+}
+
+function initFieldSize() {
+    var xhr = new XMLHttpRequest();
+    try {
+        xhr.open('GET', 'https://kde.link/test/get_field_size.php', false);
+        xhr.send();
+        if (xhr.status != 200) {
+            fieldSize = {
+                width: 5,
+                height: 6
+            }
+        } else {
+            fieldSize = JSON.parse(xhr.responseText);
+        }
+    } catch (err) {
+        fieldSize = {
+            width: 5,
+            height: 6
+        }
+    }
 }
 
 function startGame() {
@@ -101,7 +123,8 @@ function startGame() {
     score.innerHTML = "0";
     field.innerHTML = "";
     newGameBtn.onclick = startGame;
-    initInterface(fieldSize.width, fieldSize.height);
+    initFieldSize();
+    initField(fieldSize.width, fieldSize.height);
     initCardArray(fieldSize.width, fieldSize.height);
 }
 
